@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-rows: repeat(8, minmax(0, 1fr));
+    width: 400px;
+    height: 400px;
+    transform: rotate(0deg);
+}
+
+.piece.white {
+    color: white;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 1));
+}
+
+.piece.black {
+    color: black;
+}
+
+.flipped {
+    transform: rotate(180deg);
+}
+
+.square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.square.light {
+    background-color: #f0d9b5;
+}
+
+.square.dark {
+    background-color: #b58863;
+}
+
+.piece {
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.piece.draggable {
+    cursor: grab;
+}
+
+.dragging {
+    opacity: 0.5;
+}
+
+/* Rotate pieces for black player */
+.flipped .piece {
+    transform: rotate(180deg);
+}
+    </style>
+</head>
+<body>
+
+    <!-- Content here -->
+    <div class="flex w-full h-screen bg-zinc-900 items-center justify-center">
+        <div class="flex flex-col items-center justify-center w-1/4 h-full bg-gray-800 text-white">
+            <h2 class="text-xl font-bold">Black Captures</h2>
+            <div id="black-captures" class="flex flex-wrap justify-center  mt-4 gap-2"></div>
+        </div>
+        <div class="flex flex-col items-center justify-between w-1/2 h-full p-10">
+            <div class="chessboard w-[90%] h-[80%] bg-red-900"></div>
+            <div class="scoreboard bg-[#fcba03] text-white p-4 rounded-md mt-4 w-full flex justify-center">
+                <div class="flex gap-6">
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold">White</h3>
+                        <p id="white-score" class="text-2xl font-semibold">0</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold">Black</h3>
+                        <p id="black-score" class="text-2xl font-semibold">0</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col items-center justify-center w-1/4 h-full bg-gray-800 text-white">
+            <h2 class="text-xl font-bold">White Captures</h2>
+            <div id="white-captures" class="flex flex-wrap justify-center mt-4 gap-2"></div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" integrity="sha512-xRllwz2gdZciIB+AkEbeq+gVhX8VB8XsfqeFbUh+SzHlN96dEduwtTuVuc2u9EROlmW9+yhRlxjif66ORpsgVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/chessgame.js"></script>
+</body>
+</html>
